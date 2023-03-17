@@ -9,11 +9,11 @@ public class LimitValidator extends Validator {
     }
 
     @Override
-    public void process(TransactionResponseModel response) {
+    public boolean validate(TransactionResponseModel response) {
         if (response.getAmount() >= 50000) {
-            response.setApproved(false);
+            return false;
         } else {
-            super.process(response);
+            return super.validate(response);
         }
     }
 }

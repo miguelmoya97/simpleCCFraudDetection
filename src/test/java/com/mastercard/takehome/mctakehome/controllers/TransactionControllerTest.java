@@ -1,6 +1,5 @@
 package com.mastercard.takehome.mctakehome.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.mastercard.takehome.mctakehome.models.TransactionRequestModel;
 import org.junit.jupiter.api.Test;
@@ -36,7 +35,7 @@ public class TransactionControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                 )
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.cardNum").exists())
                 .andExpect(content().json("{ 'approved' : true }"));
     }
@@ -56,7 +55,6 @@ public class TransactionControllerTest {
                 .andExpect(status().is4xxClientError())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.errors").exists())
                 .andExpect(content().json("{ 'errors' : ['Transaction amount cannot be negative'] }"));
-        ;
     }
 
     @Test
@@ -75,7 +73,6 @@ public class TransactionControllerTest {
                 .andExpect(status().is4xxClientError())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.errors").exists())
                 .andExpect(content().json("{ 'errors' : ['Invalid card number, missing digits'] }"));
-        ;
     }
 
     @Test
@@ -94,7 +91,6 @@ public class TransactionControllerTest {
                 .andExpect(status().is4xxClientError())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.errors").exists())
                 .andExpect(content().json("{ 'errors' : ['Invalid card number, too many digits'] }"));
-        ;
     }
 
     @Test
@@ -115,7 +111,6 @@ public class TransactionControllerTest {
                 .andExpect(content().json(
                         "{ 'errors' : ['Invalid card number, too many digits', 'Transaction amount cannot be negative'] }"
                 ));
-        ;
     }
 
     @Test

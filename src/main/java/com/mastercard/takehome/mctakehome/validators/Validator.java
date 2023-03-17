@@ -8,9 +8,10 @@ public abstract class Validator {
         this.nextValidator = nextValidator;
     }
 
-    public void process(TransactionResponseModel response) {
+    public boolean validate(TransactionResponseModel response) {
         if (nextValidator != null) {
-            nextValidator.process(response);
+            return nextValidator.validate(response);
         }
+        return true;
     }
 }

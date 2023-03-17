@@ -28,8 +28,8 @@ public class OverUseValidatorTest {
                 .numTransactions(60)
                 .build();
 
-        overUseValidator.process(input);
-        assertFalse(input.isApproved());
+        boolean validated = overUseValidator.validate(input);
+        assertFalse(validated);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class OverUseValidatorTest {
                 .numTransactions(59)
                 .build();
 
-        overUseValidator.process(input);
-        assertTrue(input.isApproved());
+        boolean validated = overUseValidator.validate(input);
+        assertTrue(validated);
     }
 }

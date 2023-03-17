@@ -28,8 +28,8 @@ public class UnderUseValidatorTest {
                 .numTransactions(4)
                 .build();
 
-        underUseValidator.process(input);
-        assertFalse(input.isApproved());
+        boolean validated = underUseValidator.validate(input);
+        assertFalse(validated);
     }
 
     @Test
@@ -40,8 +40,8 @@ public class UnderUseValidatorTest {
                 .numTransactions(10)
                 .build();
 
-        underUseValidator.process(input);
-        assertTrue(input.isApproved());
+        boolean validated = underUseValidator.validate(input);
+        assertTrue(validated);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class UnderUseValidatorTest {
                 .numTransactions(40)
                 .build();
 
-        underUseValidator.process(input);
+        underUseValidator.validate(input);
         assertTrue(input.isApproved());
     }
 

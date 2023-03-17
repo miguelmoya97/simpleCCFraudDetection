@@ -10,11 +10,11 @@ public class UnderUseValidator extends Validator {
     }
 
     @Override
-    public void process(TransactionResponseModel response) {
+    public boolean validate(TransactionResponseModel response) {
         if (response.getNumTransactions() <= 35 && response.getAmount()/ response.getNumTransactions() > 500) {
-            response.setApproved(false);
+            return false;
         } else {
-            super.process(response);
+            return super.validate(response);
         }
     }
 }

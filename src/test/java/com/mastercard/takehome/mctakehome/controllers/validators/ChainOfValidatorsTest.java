@@ -38,13 +38,13 @@ public class ChainOfValidatorsTest {
                 .numTransactions(40)
                 .build();
 
-        limitValidator.process(input);
+        boolean validated = limitValidator.validate(input);
 
-        verify(limitValidator, atLeastOnce()).process(input);
-        verify(overUseValidator, atLeastOnce()).process(input);
-        verify(underUseValidator, atLeastOnce()).process(input);
+        verify(limitValidator, atLeastOnce()).validate(input);
+        verify(overUseValidator, atLeastOnce()).validate(input);
+        verify(underUseValidator, atLeastOnce()).validate(input);
 
-        assertTrue(input.isApproved());
+        assertTrue(validated);
     }
 
     @Test
@@ -56,13 +56,13 @@ public class ChainOfValidatorsTest {
                 .numTransactions(40)
                 .build();
 
-        limitValidator.process(input);
+        boolean validated = limitValidator.validate(input);
 
-        verify(limitValidator, atLeastOnce()).process(input);
-        verify(overUseValidator, never()).process(input);
-        verify(underUseValidator, never()).process(input);
+        verify(limitValidator, atLeastOnce()).validate(input);
+        verify(overUseValidator, never()).validate(input);
+        verify(underUseValidator, never()).validate(input);
 
-        assertFalse(input.isApproved());
+        assertFalse(validated);
     }
 
     @Test
@@ -74,13 +74,13 @@ public class ChainOfValidatorsTest {
                 .numTransactions(61)
                 .build();
 
-        limitValidator.process(input);
+        boolean validated = limitValidator.validate(input);
 
-        verify(limitValidator, atLeastOnce()).process(input);
-        verify(overUseValidator,atLeastOnce()).process(input);
-        verify(underUseValidator, never()).process(input);
+        verify(limitValidator, atLeastOnce()).validate(input);
+        verify(overUseValidator,atLeastOnce()).validate(input);
+        verify(underUseValidator, never()).validate(input);
 
-        assertFalse(input.isApproved());
+        assertFalse(validated);
     }
 
     @Test
@@ -92,12 +92,12 @@ public class ChainOfValidatorsTest {
                 .numTransactions(1)
                 .build();
 
-        limitValidator.process(input);
+        boolean validated = limitValidator.validate(input);
 
-        verify(limitValidator, atLeastOnce()).process(input);
-        verify(overUseValidator,atLeastOnce()).process(input);
-        verify(underUseValidator, atLeastOnce()).process(input);
+        verify(limitValidator, atLeastOnce()).validate(input);
+        verify(overUseValidator,atLeastOnce()).validate(input);
+        verify(underUseValidator, atLeastOnce()).validate(input);
 
-        assertFalse(input.isApproved());
+        assertFalse(validated);
     }
 }

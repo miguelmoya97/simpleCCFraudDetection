@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RestController
 @Slf4j
 public class TransactionController {
-    @PostMapping(path="/analyzeTransaction")
+    @PostMapping(path="/analyzeTransaction", consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<TransactionResponseModel> analyzeTransaction(@Valid @RequestBody TransactionRequestModel req) {
         List<Integer> weeklyTransactions = new CardCounter().fetchWeeklyTransactions(req.getCardNum());
 
@@ -31,15 +33,17 @@ public class TransactionController {
                 .numTransactions(Util.sumTransactions(weeklyTransactions))
                 .build();
 
-        createChainValidators().process(response);
+        if (!createChainValidators().validate(response)) {
+            response.setApproved(false);
+        }
 
-        log.info("Card Number: {}, Amount Spent: {}, Number of Transactions (Weekly): {}",
+        log.info("Card Number = {}, Amount Spent = {}, Number of Transactions (Weekly) = {}",
                 Util.obfuscateCardNumber(req.getCardNum()),
                 req.getAmount(),
                 response.getNumTransactions()
         );
 
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     private Validator createChainValidators() {

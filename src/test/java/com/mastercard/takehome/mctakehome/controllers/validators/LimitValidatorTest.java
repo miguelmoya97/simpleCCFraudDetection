@@ -23,8 +23,8 @@ public class LimitValidatorTest {
                 .amount(50000)
                 .isApproved(true)
                 .build();
-        limitValidator.process(input);
-        assertFalse(input.isApproved());
+        boolean validated = limitValidator.validate(input);
+        assertFalse(validated);
     }
 
     @Test
@@ -33,7 +33,7 @@ public class LimitValidatorTest {
                 .amount(500)
                 .isApproved(true)
                 .build();
-        limitValidator.process(input);
-        assertTrue(input.isApproved());
+        boolean validated = limitValidator.validate(input);
+        assertTrue(validated);
     }
 }
