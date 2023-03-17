@@ -1,10 +1,9 @@
 package com.mastercard.takehome.mctakehome.controllers;
 
-import com.mastercard.takehome.mctakehome.controllers.validators.Chain;
-import com.mastercard.takehome.mctakehome.controllers.validators.Validator;
-import com.mastercard.takehome.mctakehome.controllers.validators.concrete.LimitValidator;
-import com.mastercard.takehome.mctakehome.controllers.validators.concrete.OverUseValidator;
-import com.mastercard.takehome.mctakehome.controllers.validators.concrete.UnderUseValidator;
+import com.mastercard.takehome.mctakehome.validators.Validator;
+import com.mastercard.takehome.mctakehome.validators.concrete.LimitValidator;
+import com.mastercard.takehome.mctakehome.validators.concrete.OverUseValidator;
+import com.mastercard.takehome.mctakehome.validators.concrete.UnderUseValidator;
 import com.mastercard.takehome.mctakehome.external.CardCounter;
 import com.mastercard.takehome.mctakehome.models.TransactionRequestModel;
 import com.mastercard.takehome.mctakehome.models.TransactionResponseModel;
@@ -34,7 +33,7 @@ public class TransactionController {
 
         createChainValidators().process(response);
 
-        log.info("Card Number: {}, Amount Spent: {}, Number of Transactiosn (Weekly): {}",
+        log.info("Card Number: {}, Amount Spent: {}, Number of Transactions (Weekly): {}",
                 Util.obfuscateCardNumber(req.getCardNum()),
                 req.getAmount(),
                 response.getNumTransactions()

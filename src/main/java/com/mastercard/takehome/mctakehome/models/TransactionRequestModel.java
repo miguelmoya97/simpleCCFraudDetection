@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @Builder
 public class TransactionRequestModel {
-    @NotNull(message = "Missing card number field`")
+    @NotNull(message = "Missing card number field")
     @Min(value = 1000000000000000L, message = "Invalid card number, missing digits")
     @Max(value = 9999999999999999L, message = "Invalid card number, too many digits")
     private final Long cardNum;

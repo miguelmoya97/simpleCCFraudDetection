@@ -1,9 +1,9 @@
 package com.mastercard.takehome.mctakehome.controllers.validators;
 
-import com.mastercard.takehome.mctakehome.controllers.validators.Validator;
-import com.mastercard.takehome.mctakehome.controllers.validators.concrete.LimitValidator;
-import com.mastercard.takehome.mctakehome.controllers.validators.concrete.OverUseValidator;
-import com.mastercard.takehome.mctakehome.controllers.validators.concrete.UnderUseValidator;
+import com.mastercard.takehome.mctakehome.validators.Validator;
+import com.mastercard.takehome.mctakehome.validators.concrete.LimitValidator;
+import com.mastercard.takehome.mctakehome.validators.concrete.OverUseValidator;
+import com.mastercard.takehome.mctakehome.validators.concrete.UnderUseValidator;
 import com.mastercard.takehome.mctakehome.models.TransactionResponseModel;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -37,8 +37,6 @@ public class ChainOfValidatorsTest {
                 .isApproved(true)
                 .numTransactions(40)
                 .build();
-//        limitValidator.setNextValidator(overUseValidator);
-//        overUseValidator.setNextValidator(underUseValidator);
 
         limitValidator.process(input);
 

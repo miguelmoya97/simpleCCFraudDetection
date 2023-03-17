@@ -13,7 +13,7 @@ public class CardCounter {
     public List<Integer> fetchWeeklyTransactions(Long cardNumber) {
 
 
-        // sometimes the site just crashes, so i created my own microservice
+        // The provided API does not work, so I created my own microservice
         List<Integer> transactions = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
             transactions.add(new Random().nextInt(13));

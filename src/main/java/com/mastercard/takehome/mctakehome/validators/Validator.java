@@ -1,4 +1,4 @@
-package com.mastercard.takehome.mctakehome.controllers.validators;
+package com.mastercard.takehome.mctakehome.validators;
 
 import com.mastercard.takehome.mctakehome.models.TransactionResponseModel;
 public abstract class Validator {

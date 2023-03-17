@@ -1,6 +1,6 @@
-package com.mastercard.takehome.mctakehome.controllers.validators.concrete;
+package com.mastercard.takehome.mctakehome.validators.concrete;
 
-import com.mastercard.takehome.mctakehome.controllers.validators.Validator;
+import com.mastercard.takehome.mctakehome.validators.Validator;
 import com.mastercard.takehome.mctakehome.models.TransactionResponseModel;
 
 public class LimitValidator extends Validator {
